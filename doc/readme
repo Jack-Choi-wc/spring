@@ -1,7 +1,10 @@
-spring 3.2.2 
-mybatis 
-mysql
-sitemesh
+Spring version	3.2.2.RELEASE
+java 	1.7.0_79
+tomcat	8.0.23
+Spring Tool Suite 	3.6.4.RELEASE
+sitemesh	2.4.2
+mybatis	
+lombok	
 
 
 eclipse 
