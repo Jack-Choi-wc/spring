@@ -1,3 +1,9 @@
+spring 3.2.2 
+mybatis 
+mysql
+sitemesh
+
+
 eclipse 
 1.add TOMCAT server.
 update server Module path : /spider
