@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	   http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+	 <!-- Transaction manager for a single JDBC DataSource -->
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+   	<!-- Annotation 을 사용한 트랜잭션 사용시 활성화 -->
+ 	<tx:annotation-driven transaction-manager="transactionManager" order="2"></tx:annotation-driven>
+  	 
+      <bean id="spiderSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:spring/mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath*:mapper/com/wcc/spider/dao/**/*mapper.xml"/>
+ 		<property name="failFast" value="true"/>
+ 		<property name="typeAliasesPackage" value="com.wcc.spider.model" />
+	</bean>
+    <mybatis:scan base-package="com.wcc.spider.dao" factory-ref="spiderSqlSessionFactory" />
+ 	
+ 	
+ 	    <!-- myBatis 로그 출력용 -->
+  
+  <!--    <bean id="logDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="dataSource" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL:::" />
+            </bean>
+        </property>
+    </bean>
+  -->	
+ 	
+</beans>
