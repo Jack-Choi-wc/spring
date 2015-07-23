@@ -1,0 +1,11 @@
+eclipse 
+1.add TOMCAT server.
+update server Module path : /spider
+
+test url 
+get member list(return list)
+http://localhost:8080/spider/member/list.do
+
+get one member(return json)
+http://localhost:8080/spider/member
+
