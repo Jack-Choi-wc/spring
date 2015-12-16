@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,9 +28,16 @@ public class MemberController {
 	
 	@Resource
 	private MappingJackson2JsonView jsonView;
-	
-    @RequestMapping(value = "/member", method = {RequestMethod.GET})
-    public View getMember(Model model,@RequestParam(value="memberNo", defaultValue="1") String memberNo) {
+	/***
+	 * getMember
+	 * get Member by member No.
+	 * @param model
+	 * @param memberNo
+	 * @return Member
+	 */
+    @RequestMapping(value = "/members/{memberNo}", method = {RequestMethod.GET})
+    public View getMember(Model model,
+    		      @PathVariable(value="memberNo") String memberNo) {
     	Member member = new Member();
     	member.setMemberNo(memberNo);
     	Member rtnMember = memberService.getMember(member);
@@ -37,18 +45,29 @@ public class MemberController {
     	return jsonView;
     }
      
-    @RequestMapping(value = "/addMember", method = {RequestMethod.GET})
+
+    /***
+     * addmember
+     * 
+     * @param model
+     * @param memberNo
+     * @param name
+     * @param email
+     * @return
+     */
+    @RequestMapping(value = "/members/{memberNo}", method = {RequestMethod.PUT})
     public View addmember(Model model,
-    					  @RequestParam(value="memberNo",required = true) String memberNo,
-    					  @RequestParam(value="name",required = false) String name,
-    					  @RequestParam(value="email",required = false) String email) {
+							@PathVariable(value="memberNo") String memberNo,
+							@RequestParam(value="name",required = false) String name,
+	    				    @RequestParam(value="email",required = false) String email) {
    
     	String rtnString = "sucess";
     	Member member = new Member();
-    	member.setMemberNo(memberNo);
     	member.setName(name);
     	member.setEmail(email);
     	member.setUpdateId(memberNo);
+    	member.setMemberNo(memberNo);
+        	
     	try{
     		memberService.insertMember(member);
     	}catch(Exception e){
@@ -59,6 +78,13 @@ public class MemberController {
     	return jsonView;
     }
     
+    
+    /***
+     * getMemberList
+     * get member list.
+     * @param model
+     * @return Member list.
+     */
     @RequestMapping(value = "/member/list.do", method = {RequestMethod.GET})
     public String getMemberList(Model model) {
     	List<Member> list = memberService.getMemberList();
