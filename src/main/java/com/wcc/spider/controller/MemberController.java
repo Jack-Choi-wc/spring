@@ -47,7 +47,7 @@ public class MemberController {
      
 
     /***
-     * addmember
+     * add member
      * 
      * @param model
      * @param memberNo
@@ -64,10 +64,10 @@ public class MemberController {
     	String rtnString = "sucess";
     	Member member = new Member();
     	member.setName(name);
+    	member.setMemberNo(memberNo);
     	member.setEmail(email);
     	member.setUpdateId(memberNo);
-    	member.setMemberNo(memberNo);
-        	
+    		
     	try{
     		memberService.insertMember(member);
     	}catch(Exception e){
@@ -91,4 +91,6 @@ public class MemberController {
     	model.addAttribute("list", list);
     	return "/member/list";
     }
+    
 }
+
