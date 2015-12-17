@@ -29,7 +29,12 @@ public class JqGridController {
 	@Resource
 	private MappingJackson2JsonView jsonView;
 	
-	
+	/***
+	 * getjqGridArrayList
+	 * local data test.
+	 * @param model
+	 * @return
+	 */
     @RequestMapping(value = "arrayList.do", method = {RequestMethod.GET})
     public String getjqGridArrayList(Model model) {
     	List<Member> list = memberService.getMemberList();
@@ -38,35 +43,32 @@ public class JqGridController {
     	return "/jqgrid/arrayList";
     }
     
+    /***
+     * list.
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "list.do", method = {RequestMethod.GET})
     public String getList(Model model) {
     	log.debug("getList ");
     	return "/jqgrid/list";
     }
     
+    /***
+     * getJsonMemberList 
+     * jqgrid json test.
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "jsonList.do", method = {RequestMethod.GET})
     public View getJsonMemberList(Model model) {
     	List<Member> list = memberService.getMemberList();
     	model.addAttribute("rows", list);
-    
-    	
-    	/*$page = $_GET['page']; // get the requested page
-    	$limit = $_GET['rows']; // get how many rows we want to have into the grid
-    	$sidx = $_GET['sidx']; // get index row - i.e. user click to sort
-    	$sord = $_GET['sord']; // get the direction
-    	
-    	*/
-    	
     	model.addAttribute("limit", 5);
     	model.addAttribute("page", 1);
-            
-    	
-    	
     	log.debug("getJsonMemberList ");
     	return jsonView;
     }
-    
-   
     
 }
 
