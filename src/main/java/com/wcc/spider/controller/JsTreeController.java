@@ -17,11 +17,11 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import com.wcc.spider.model.Member;
 import com.wcc.spider.service.MemberService;
 
-@RequestMapping(value = "/jqgrid")
+@RequestMapping(value = "/jstree")
 @Controller
-public class JqGridController {
+public class JsTreeController {
 	
-	private static Log log = LogFactory.getLog(JqGridController.class);
+	private static Log log = LogFactory.getLog(JsTreeController.class);
 	
 	@Autowired
 	private MemberService memberService;
@@ -30,20 +30,6 @@ public class JqGridController {
 	private MappingJackson2JsonView jsonView;
 	
 	/***
-	 * getjqGridArrayList
-	 * local data test.
-	 * @param model
-	 * @return
-	 */
-    @RequestMapping(value = "arrayList.do", method = {RequestMethod.GET})
-    public String getjqGridArrayList(Model model) {
-    	List<Member> list = memberService.getMemberList();
-    	model.addAttribute("list", list);
-    	log.debug("getjqGridMemberList ");
-    	return "/jqgrid/arrayList";
-    }
-    
-    /***
      * list.
      * @param model
      * @return
@@ -51,7 +37,7 @@ public class JqGridController {
     @RequestMapping(value = "list.do", method = {RequestMethod.GET})
     public String getList(Model model) {
     	log.debug("getList ");
-    	return "/jqgrid/list";
+    	return "/jstree/list";
     }
     
     /***
