@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcc.spider.dao.OrganizationDAO">
+	<select id="getOrganizationList" resultType="Organization">
+		SELECT 
+			A.ID,
+			A.TEXT,
+		    A.PARENT,
+		    A.ICON,
+		    A.STATE,
+		    A.UPDATE_ID,
+		    A.UPDATE_DT
+		FROM 
+			TB_Organization A 	
+	</select>
+ </mapper>

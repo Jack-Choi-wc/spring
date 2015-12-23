@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import com.wcc.spider.model.Member;
-import com.wcc.spider.service.MemberService;
+import com.wcc.spider.model.Organization;
+import com.wcc.spider.service.OraganizationService;
 
 @RequestMapping(value = "/jstree")
 @Controller
@@ -24,7 +24,7 @@ public class JsTreeController {
 	private static Log log = LogFactory.getLog(JsTreeController.class);
 	
 	@Autowired
-	private MemberService memberService;
+	private OraganizationService oraganizationService;
 	
 	@Resource
 	private MappingJackson2JsonView jsonView;
@@ -41,20 +41,20 @@ public class JsTreeController {
     }
     
     /***
-     * getJsonMemberList 
-     * JqGrid JSON test.
+     * getOrganizationList 
+     * jsTree JSON test.
      * @param model
      * @return
      */
     @RequestMapping(value = "jsonList.do", method = {RequestMethod.GET})
-    public View getJsonMemberList(Model model) {
-    	List<Member> list = memberService.getMemberList();
-    	model.addAttribute("rows", list);
-    	model.addAttribute("limit", 5);
-    	model.addAttribute("page", 1);
-    	log.debug("getJsonMemberList ");
+    public View getOrganizationList(Model model) {
+    	List<Organization> list = oraganizationService.getOrganizationList();
+    	model.addAttribute("list", list);
+    	log.debug("getOrganizationList ");
     	return jsonView;
     }
     
+    
+  
 }
 
