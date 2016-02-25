@@ -15,11 +15,8 @@
 <script type="text/javascript" src="<c:url value="/jqgrid/js/jquery.jqGrid.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/jqgrid/js/i18n/grid.locale-en.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/jstree/jstree.js"/>"></script>
-
-
 <script type="text/javascript">
 $(document).ready(function() {
-
  	$('#tree').jstree({ 'core' : {
 	    'data' : [
 	       'Simple root node',
@@ -32,8 +29,7 @@ $(document).ready(function() {
 	    ]
 	} });
  
-
-	/*  $("#using_json").jstree({
+ 	/*  $("#using_json").jstree({
 	    "json_data" : {
 	        "ajax" : {
 	            "url" : "/spider/jstree/jsonList.do",
@@ -46,7 +42,6 @@ $(document).ready(function() {
 	}); 
 	 
 	   */
-	 
 	 
 	$.ajax({
 	       async : true,
@@ -75,8 +70,6 @@ $(document).ready(function() {
 	           alert(thrownError);
 	       }
 	}); 
-	   
-
 	/*     $('#using_json').jstree({ 'core' : {
 	        'data' : [
 	           { "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
@@ -87,13 +80,10 @@ $(document).ready(function() {
 	    } });
 	*/
 
-   
-   
    //jsTree event
    //event 
-   
    //select event.
-	$("#using_json").bind("select_node.jstree", function(evt, data){
+    $("#using_json").bind("select_node.jstree", function(evt, data){
        	 var i, j, r = [], ids=[];
        	    for(i = 0, j = data.selected.length; i < j; i++) {
        	      r.push(data.instance.get_node(data.selected[i]).text);
@@ -103,7 +93,6 @@ $(document).ready(function() {
        	    $('#event_result2').html('Selected: ' + ids.join(', '));
        }
 	);
-   
    //add button.
     $("#btnAdd").click(function() {
        	var parent = $('#using_json').jstree('get_selected');
@@ -112,7 +101,6 @@ $(document).ready(function() {
     	$('#using_json').jstree(true).open_all();
     	
     });
-    
    //delete button.
     $("#btnDelete").click(function() {
     	var ref = $('#using_json').jstree(true);
@@ -133,7 +121,6 @@ $(document).ready(function() {
 		var jsonData = JSON.stringify(getJson);
 		//alert("jsonData :" +jsonData);
     });
-    
     //rename event 
 	$("#using_json").bind("rename_node.jstree", function(evt, data){
 		var jsonData = JSON.stringify(data);
@@ -142,7 +129,6 @@ $(document).ready(function() {
 		//have to update db.
 	  	} 
 	);
-
     //create event.
 	$("#using_json").bind("create_node.jstree", function(evt, data){
 		var jsonData = JSON.stringify(data);
@@ -151,7 +137,6 @@ $(document).ready(function() {
 		//have to update db.
 	  	} 
 	);
-
     //delete event.
 	$("#using_json").bind("delete_node.jstree", function(evt, data){
 		var jsonData = JSON.stringify(data);
@@ -160,7 +145,6 @@ $(document).ready(function() {
 		//have to update db.
 	  	} 
 	);
-	
     //move event.
 	$("#using_json").bind("move_node.jstree", function(evt, data){
 		var jsonData = JSON.stringify(data);
@@ -169,15 +153,13 @@ $(document).ready(function() {
 		//have to update db.
 	  	} 
 	);
-	
 	//change event.
 	$("#using_json").bind("changed.jstree", function(evt, data){
 	    var path = data.instance.get_path(data.node,'/');
-		alert('path : ' + path);
+		$('#inputPath').val(path);
 		
 	  	} 
 	);
-	
 	//serach tree.
 	var to ='';
 	 $('#searchText').keyup(function () {
@@ -187,8 +169,29 @@ $(document).ready(function() {
 		      $('#using_json').jstree(true).search(v);
 		    }, 250);
 	 });
-});
+	/* 
+	$('#using_json').jstree('get_all_checked').each(function (index, element) {
+        alert($(this).attr('id'));
+    }); 
+    */
+	$("#using_json").bind("check_node.jstree", function(evt, data){
+       	 var i, j, r = [], ids=[];
+       	    for(i = 0, j = data.selected.length; i < j; i++) {
+       	      r.push(data.instance.get_node(data.selected[i]).text);
+       	      ids.push(data.instance.get_node(data.selected[i]).id);
+       	    }
+       }
+	);
 
+    //색상을 핑크로 바꾸고, 볼드체,이태리체로 바꾼다.
+    //트리 노드의 id로 입력한다.
+    var setPinkColor = function(id){
+	  	$("#"+id+" >a").css("color","#FF00FF");
+    	$("#"+id+" >a").css('font-weight', 'bold');
+    	$("#"+id+" >a").css('font-style', 'italic');
+		//$("#"+id+" >a").css('text-decoration', 'line-through');
+  };
+});
 </script>
 </head>
 <body>
@@ -207,6 +210,8 @@ $(document).ready(function() {
 	 <button id="btnAdd">add</button>
 	 <button id="btnDelete">delete</button>
 	 <input id="searchText">
+	 <br>
+	 <input id="inputPath"> 
 </div>
 </div>
 </body>

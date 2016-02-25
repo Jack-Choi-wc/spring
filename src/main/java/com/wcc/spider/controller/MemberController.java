@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.wcc.spider.model.Member;
 import com.wcc.spider.service.MemberService;
+import com.wcc.spider.utils.PageBean;
 
 @Controller
 public class MemberController {
@@ -86,9 +87,21 @@ public class MemberController {
      * @return Member list.
      */
     @RequestMapping(value = "/member/list.do", method = {RequestMethod.GET})
-    public String getMemberList(Model model) {
+    public String getMemberList(@RequestParam(value = "pageNo", defaultValue = "1", required = false) String pageNo,
+    						    Model model) {
     	List<Member> list = memberService.getMemberList();
+    	
+		int pageSize = 20;
+		int viewSize = 5;
+		int pageNumber = Integer.parseInt(pageNo);
+		int totalCount = 10;
+    	
+    	PageBean pageBean = new PageBean(pageSize, pageNumber, viewSize, totalCount);
+		
+    	
     	model.addAttribute("list", list);
+    	model.addAttribute("pageBean", pageBean);
+    	
     	return "/member/list";
     }
     

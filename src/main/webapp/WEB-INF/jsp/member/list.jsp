@@ -18,6 +18,83 @@ $(document).ready(function() {
 	$('#btnSearch').click(function() {
 		search();
 	}); 	
+	
+	
+	
+	
+	//페이지 그리기
+	 var displayPagenation = function(pageBean){
+		var startPage = parseInt(pageBean.startPage);
+		var endPage = parseInt(pageBean.endPage);
+		var pageIndex = parseInt(pageBean.pageIndex);
+		var totalPage = parseInt(pageBean.totalPage);
+		var prePage = parseInt(startPage-parseInt(1));
+		var nextPage = parseInt(endPage+parseInt(1));
+		if(0 == prePage){
+			prePage = 1;
+		}
+		var listHtml ='';
+	 	//listHtml += '<div class="ext_page" id="divPagenation">';
+	 	if(!pageBean.isFirstPage){
+	 		listHtml += '<a href="#" class="direction prev"><span></span><span></span>';
+	 		listHtml += '<input type="hidden" value="1">';
+	 		listHtml += '</a>';
+	 	}else{
+			listHtml += '<a href="/" class="direction prev disabled"><span></span><span></span></a>';
+	 	} 	
+	 	if(pageBean.hasPrevBlock){
+	 		listHtml += '<a href="#" class="direction prev"><span></span>';
+	 		listHtml += '<input type="hidden" value="'+prePage+'">';
+	 		listHtml += '</a>';
+	 	}else{
+	 		listHtml += '<a href="/" class="direction prev disabled"><span></span></a> ';
+	 	}	
+
+	 	for(var i=startPage; i<= endPage; i++){
+	 		if(i == pageIndex){
+	 			listHtml += '<span>';
+	 			listHtml += '<a href="/" class="c_page disabled"><strong>'+i+'</strong></a>';
+	 			listHtml += '</span>';
+	 		}else{
+				listHtml += '<span>';
+	 			listHtml += '<a href="#" class="c_page">'+i;
+	 			listHtml += '<input type="hidden" value="'+i+'">';
+	 			listHtml += '</a>';
+	 			listHtml += '</span>';
+	 		}
+	 	}
+	 	if (pageBean.hasNextBlock) {
+	 		listHtml += '<a href="#" class="direction next">';
+			listHtml += '<span></span>';
+			listHtml += '<input type="hidden" value="'+nextPage+'">';
+			listHtml += '</a>';
+	 	}else{
+	 		listHtml += '<a href="/" class="direction next disabled">';
+			listHtml += '<span></span>';
+			listHtml += '</a>';	
+	 	}
+	 	if (!pageBean.isLastPage) {
+	 		listHtml += '<a href="#" class="direction next">';
+			listHtml += '<span></span><span></span>';
+			listHtml += '<input type="hidden" value="'+totalPage+'">';
+			listHtml += '</a>';
+	 	}else{
+	 		listHtml += '<a href="/" class="direction next disabled">';
+			listHtml += '<span></span><span></span>';
+			listHtml += '</a>'; 		
+	 	}
+	 	//listHtml += '</div>';
+	 	return listHtml;
+	 };
+	
+	
+	
+	
+	
+	
+	
+	
+	
 });
 </script>
 </head>

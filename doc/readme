@@ -21,6 +21,13 @@ http://localhost:8080/spider/member
 
 
 2.jqGrid test.
+http://localhost:8080/spider/jqgrid/list.do
+
+
+3.jsTree test.
+
+http://localhost:8080/spider/jstree/list.do
+
 
 
 

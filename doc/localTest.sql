@@ -34,8 +34,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
+INSERT INTO `test`.`TB_Organization` (`ID`, `TEXT`, `PARENT`, `ICON`, `UPDATE_ID`, `UPDATE_DT`) VALUES ('root', 'root', '#', '/spider/images/ConferenceCall-24.png', 'system', now());
+INSERT INTO `test`.`TB_Organization` (`ID`, `TEXT`, `PARENT`, `ICON`, `UPDATE_ID`, `UPDATE_DT`) VALUES ('group1', 'group1', 'root', '/spider/images/ConferenceCall-24.png', 'system', now());
+INSERT INTO `test`.`TB_Organization` (`ID`, `TEXT`, `PARENT`, `ICON`, `UPDATE_ID`, `UPDATE_DT`) VALUES ('group2', 'group2', 'root', '/spider/images/ConferenceCall-24.png', 'system', now());
 
-INSERT INTO `test`.`TB_Organization` (`ID`, `TEXT`, `PARENT`, `ICON`, `UPDATE_ID`, `UPDATE_DT`) VALUES ('root', 'root', '#', '', 'system', now());
-INSERT INTO `test`.`TB_Organization` (`ID`, `TEXT`, `PARENT`, `ICON`, `UPDATE_ID`, `UPDATE_DT`) VALUES ('group1', 'group1', 'root', '', 'system', now());
 
 
