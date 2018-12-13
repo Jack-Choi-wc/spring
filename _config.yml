@@ -1,11 +1,11 @@
 # Site wide configuration
 
-title: "My Site"
-description: "This is a description of my awesome site."
+title: "Jack choi"
+description: "This is a description of my test site."
 logo: # 120x120 px default image used for Twitter summary card
 teaser: # 400x250 px default teaser image used in image archive grid
 locale: en
-url:
+url:"https://Jack-Choi-wc.github.io"
 feed:
   path: atom.xml
 
@@ -25,11 +25,11 @@ gems:
 
 
 # Site owner
-owner:
-  name:
-  email:
+owner: Jack Choi.
+  name: Jack Choi.
+  email: choi.woncheol@gmaii.com
   twitter:
-  google:
+  google: choi.woncheol@gmaii.com
     ad-client:
     ad-slot:
   bio:
@@ -62,3 +62,4 @@ exclude:
   - package.json
   - spec
   - tmp
+remote_theme : mmistakes/minimal-mistakes
